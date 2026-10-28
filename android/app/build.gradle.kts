@@ -46,7 +46,15 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions { jvmTarget = "17" }
-    buildFeatures { compose = true }
+    buildFeatures { compose = true; buildConfig = true }
+
+    // "standard" is the downloadable app. "full" also mirrors notifications, which needs Notification access;
+    // Google Play Protect blocks apps that ask for that when they are installed from outside the Play Store.
+    flavorDimensions += "edition"
+    productFlavors {
+        create("standard") { dimension = "edition"; buildConfigField("boolean", "MIRROR", "false") }
+        create("full") { dimension = "edition"; buildConfigField("boolean", "MIRROR", "true"); versionNameSuffix = "-full" }
+    }
 }
 
 protobuf {
