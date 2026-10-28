@@ -34,3 +34,6 @@ release/
 *.apk
 icon/Assets.xcassets/
 icon/AppIcon.iconset/
+
+android/keystore.properties
+*.jks
