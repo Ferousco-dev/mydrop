@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/build-nd/SourcePackages/checkouts/ASN1" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/build-nd/SourcePackages/checkouts/BigInt" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/build-nd/SourcePackages/checkouts/SwiftECC" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/build-nd/SourcePackages/checkouts/SwiftImageReadWrite" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/build-nd/SourcePackages/checkouts/qrcode" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/build-nd/SourcePackages/checkouts/swift-protobuf" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/build-nd/SourcePackages/checkouts/swift-qrcode-generator" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/build-qd/SourcePackages/checkouts/ASN1" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/build-qd/SourcePackages/checkouts/BezelNotification" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/build-qd/SourcePackages/checkouts/BigInt" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/build-qd/SourcePackages/checkouts/DeviceKit" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/build-qd/SourcePackages/checkouts/Swift-Cross-Kit-Types" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/build-qd/SourcePackages/checkouts/Swift-Function-Tools" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/build-qd/SourcePackages/checkouts/SwiftECC" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/build-qd/SourcePackages/checkouts/SwiftImageReadWrite" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/build-qd/SourcePackages/checkouts/ZIPFoundation" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/build-qd/SourcePackages/checkouts/qrcode" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/build-qd/SourcePackages/checkouts/swift-protobuf" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/build-qd/SourcePackages/checkouts/swift-qrcode-generator" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/neardrop-src" vcs="Git" />
+  </component>
+</project>

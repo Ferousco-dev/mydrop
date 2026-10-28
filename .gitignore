@@ -1,0 +1,36 @@
+# Build output
+.build/
+build-nd/
+build-qd/
+build-qd.log
+*.app
+*.xcresult
+DerivedData/
+
+# Generated icon files (rebuild with icon/make-icon.swift)
+icon/AppIcon.iconset/
+icon/make-icon
+
+# Third-party code and downloads (not part of this project)
+src/
+neardrop-src/
+release-5.1/
+LUI/
+
+# Scratch and leftovers
+*.bak
+*.zip
+test-from-mac.txt
+
+# macOS / editors
+.DS_Store
+.swiftpm/
+xcuserdata/
+*.xcodeproj/project.xcworkspace/
+android/app/src/main/res/drawable-nodpi/mac_icon.png
+
+# Binaries go on the GitHub release, not in the repo
+release/
+*.apk
+icon/Assets.xcassets/
+icon/AppIcon.iconset/
