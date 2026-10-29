@@ -52,8 +52,10 @@ android {
     // Google Play Protect blocks apps that ask for that when they are installed from outside the Play Store.
     flavorDimensions += "edition"
     productFlavors {
-        create("standard") { dimension = "edition"; buildConfigField("boolean", "MIRROR", "false") }
-        create("full") { dimension = "edition"; buildConfigField("boolean", "MIRROR", "true"); versionNameSuffix = "-full" }
+        create("standard") { dimension = "edition"; buildConfigField("boolean", "MIRROR", "false"); buildConfigField("boolean", "FILES", "true") }
+        // "play" is the Google Play edition: no All files access and no phone-files feature, which Play only allows for file managers.
+        create("play") { dimension = "edition"; buildConfigField("boolean", "MIRROR", "false"); buildConfigField("boolean", "FILES", "false") }
+        create("full") { dimension = "edition"; buildConfigField("boolean", "MIRROR", "true"); buildConfigField("boolean", "FILES", "true"); versionNameSuffix = "-full" }
     }
 }
 

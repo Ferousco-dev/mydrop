@@ -168,7 +168,7 @@ adb install -r app/build/outputs/apk/standard/debug/app-standard-debug.apk
 ## Notes and limits
 - **Phones that pause background apps** (some Tecno/Transsion, Xiaomi and others) may need the battery steps in Settings → *Keep receiving in the background*. Without them the phone still receives whenever the app is open.
 - **Clipboard sync:** Mac to phone works in the background. Phone to Mac works only while MyDrop is open, because Android does not let apps read the clipboard from the background. The phone must have set the Mac to *Always accept*.
-- **Two Android editions.** The download is the `standard` edition. Notification mirroring lives in the `full` edition, which you build from source, because Google Play Protect blocks apps that ask for Notification access when they are installed from outside the Play Store.
+- **Three Android editions.** The `play` edition (for Google Play) has no phone-files feature, because Play only allows All files access for file managers. The download on GitHub is the `standard` edition. Notification mirroring lives in the `full` edition, which you build from source, because Google Play Protect blocks apps that ask for Notification access when they are installed from outside the Play Store.
 - **Phone files** are unencrypted on the local network, and editing is off by default.
 - A Mac can see other Quick Share receivers (a phone's built-in Quick Share set to "Everyone"), but a phone's built-in Quick Share usually cannot see a Mac, because that needs a Bluetooth announcement macOS cannot send.
 - MyDrop has no paid tier, so the receiving limit the original engine applies to free users is switched off (`plusVersionState` in `Stubs.swift`). Set it to `false` to bring the limit back.

@@ -61,6 +61,7 @@ fun SettingsScreen(
     onOpenDownloads: () -> Unit,
     onOpenAppSettings: () -> Unit,
     onOpenPrivacy: () -> Unit,
+    showFiles: Boolean = true,
     extras: List<SettingToggle>,
     shareFiles: Boolean,
     shareCode: String,
@@ -107,7 +108,7 @@ fun SettingsScreen(
                         receiveWhenClosed, onReceiveChange,
                         "Enable the setting above to receive files even if MyDrop is closed and the screen is turned off.", card)
                 }
-                item {
+                if (showFiles) item {
                     SettingToggleCard(Icons.Rounded.Dns, MyDropColors.Blue, "Let my Mac browse this phone", shareFiles, onShareChange,
                         if (shareFiles) "On. On your Mac, choose Browse Files on this phone and enter the code $shareCode once. Turn this off when you're done."
                         else "Lets your Mac open this phone's folders in Finder, read-only. Needs All files access. A code protects it.", card)
