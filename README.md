@@ -25,7 +25,9 @@ MyDrop speaks Quick Share, so it works with QuickDrop-compatible devices, and it
 <p align="center">
   <img src="assets/preview-mac.png" alt="MyDrop on the Mac, sending files to a phone" width="760">
   <br><br>
-  <img src="assets/preview-android.png" alt="MyDrop on Android: home and settings" width="760">
+  <img src="assets/preview-android-home.png" alt="MyDrop on Android: home" width="360">
+  &nbsp;&nbsp;
+  <img src="assets/preview-android-settings.png" alt="MyDrop on Android: settings" width="360">
 </p>
 
 The Mac and Android apps are released separately: see the [releases page](https://github.com/Ferousco-dev/mydrop/releases) for each.

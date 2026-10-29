@@ -3,9 +3,7 @@ import AppKit
 // Builds the README preview images on a dark background with the MyDrop mark at the bottom right.
 // usage: make-previews <phone-home.png> <phone-settings.png> <mac-panel.png>
 let a = CommandLine.arguments
-let W = 1920, H = 1080
-
-func canvas(_ draw: (CGFloat, CGFloat) -> Void, to path: String) {
+func canvas(_ W: Int, _ H: Int, _ draw: (CGFloat, CGFloat) -> Void, to path: String) {
     let rep = NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: W, pixelsHigh: H, bitsPerSample: 8, samplesPerPixel: 4,
                                hasAlpha: true, isPlanar: false, colorSpaceName: .deviceRGB, bytesPerRow: 0, bitsPerPixel: 0)!
     NSGraphicsContext.saveGraphicsState()
@@ -18,9 +16,9 @@ func canvas(_ draw: (CGFloat, CGFloat) -> Void, to path: String) {
     draw(w, h)
     // MyDrop mark, bottom right
     if let icon = NSImage(contentsOfFile: "icon/AppIcon.iconset/icon_256x256.png") {
-        icon.draw(in: NSRect(x: w - 330, y: 52, width: 76, height: 76))
+        icon.draw(in: NSRect(x: w - 300, y: 44, width: 64, height: 64))
     }
-    "MyDrop".draw(at: NSPoint(x: w - 238, y: 64), withAttributes: [.font: NSFont.systemFont(ofSize: 50, weight: .bold), .foregroundColor: NSColor.white])
+    "MyDrop".draw(at: NSPoint(x: w - 224, y: 54), withAttributes: [.font: NSFont.systemFont(ofSize: 42, weight: .bold), .foregroundColor: NSColor.white])
     NSGraphicsContext.restoreGraphicsState()
     try! rep.representation(using: .png, properties: [:])!.write(to: URL(fileURLWithPath: path))
 }
@@ -31,12 +29,8 @@ func place(_ path: String, height: CGFloat, centerX: CGFloat, bottom: CGFloat) {
     img.draw(in: NSRect(x: centerX - height * r / 2, y: bottom, width: height * r, height: height), from: .zero, operation: .sourceOver, fraction: 1)
 }
 
-canvas({ w, h in
-    place(a[1], height: 980, centerX: w * 0.36, bottom: 70)     // home screen
-    place(a[2], height: 980, centerX: w * 0.64, bottom: 30)     // settings, a little higher
-}, to: "assets/preview-android.png")
-
-canvas({ w, h in
-    place(a[3], height: 820, centerX: w * 0.5, bottom: 150)
-}, to: "assets/preview-mac.png")
+// One phone per image (portrait), so each screen can be shown on its own.
+canvas(1080, 1350, { w, h in place(a[1], height: 1180, centerX: w * 0.5, bottom: 120) }, to: "assets/preview-android-home.png")
+canvas(1080, 1350, { w, h in place(a[2], height: 1180, centerX: w * 0.5, bottom: 120) }, to: "assets/preview-android-settings.png")
+canvas(1920, 1080, { w, h in place(a[3], height: 820, centerX: w * 0.5, bottom: 150) }, to: "assets/preview-mac.png")
 print("ok")
