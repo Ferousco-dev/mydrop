@@ -235,11 +235,13 @@ class Outbound(
                 }
             }
             ch.sendDisconnection()
+            // Allow receiver brief time to process final chunks and flush before socket termination
+            try { Thread.sleep(600) } catch (_: InterruptedException) {}
             listener.onFinished()
         } catch (e: Exception) {
             if (!cancelled) listener.onFailed(e.message ?: e.javaClass.simpleName)
         } finally {
-            ch.close()
+            try { ch.close() } catch (_: Exception) {}
         }
     }
 

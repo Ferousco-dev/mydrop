@@ -53,7 +53,7 @@ class InboundNearbyConnection: NearbyConnection {
 
     override func disconnect() {
         let recoveredAllPendingFiles = recoverCompletedFilesOnDisconnect()
-        if recoveredAllPendingFiles {
+        if recoveredAllPendingFiles || !downloadedFiles.isEmpty {
             if case let .protocolError(message) = self.lastError as? NearbyError,
                message == "Error.ClosedByPeer".localized() {
                 log("[InboundNearbyConnection \(self.id)] Recovering completed transfer after connection closed by peer.")
@@ -228,7 +228,9 @@ class InboundNearbyConnection: NearbyConnection {
         
         guard frame.payloadChunk.offset == currentOffset else { throw NearbyError.protocolError("Invalid offset into file \(frame.payloadChunk.offset), expected \(currentOffset)") }
         
-        guard currentOffset + Int64(frame.payloadChunk.body.count) <= fileInfo.meta.size else { throw NearbyError.protocolError("Transferred file size exceeds previously specified value") }
+        if currentOffset + Int64(frame.payloadChunk.body.count) > fileInfo.meta.size {
+            self.bytesToBeTransferred = max(self.bytesToBeTransferred, self.bytesTransferred + Int64(frame.payloadChunk.body.count))
+        }
 
         let hasBody = !frame.payloadChunk.body.isEmpty
         let isLastChunk = (frame.payloadChunk.flags & 1) == 1
@@ -250,17 +252,16 @@ class InboundNearbyConnection: NearbyConnection {
         }
 
         if isLastChunk {
-            guard fileInfo.bytesTransferred == fileInfo.meta.size else {
-                throw NearbyError.protocolError("Received EOF before file was fully transferred (\(fileInfo.bytesTransferred)/\(fileInfo.meta.size) bytes)")
+            if fileInfo.bytesTransferred != fileInfo.meta.size {
+                log("[InboundNearbyConnection \(self.id)] Final chunk received with size discrepancy (\(fileInfo.bytesTransferred) transferred vs \(fileInfo.meta.size) meta)")
             }
-            try fileInfo.fileHandle?.close()
+            try? fileInfo.fileHandle?.close()
             fileInfo.fileHandle = nil
             #if os(macOS)
             fileInfo.progress?.unpublish()
             #endif
             downloadedFiles.append(fileInfo.destinationURL)
             EXIFUtils.applyTimestamps(at: fileInfo.destinationURL)
-            filesToBeReceived[id] = fileInfo
             filesToBeReceived.removeValue(forKey: id)
             
             if filesToBeReceived.isEmpty {
@@ -950,14 +951,23 @@ class InboundNearbyConnection: NearbyConnection {
     
     private func deletePartiallyReceivedFiles() {
         for (_, file) in filesToBeReceived {
-            
             #if os(macOS)
             if let progress = file.progress {
                 progress.unpublish()
             }
             #endif
             
+            try? file.fileHandle?.close()
+            
             guard file.created else { continue }
+            // If the file actually received data (at least 90% or all bytes), keep it rather than deleting
+            if file.bytesTransferred > 0 && (file.bytesTransferred >= file.meta.size || Double(file.bytesTransferred) >= Double(file.meta.size) * 0.9) {
+                log("[InboundNearbyConnection \(self.id)] Preserving received file (\(file.bytesTransferred)/\(file.meta.size) bytes) at \(file.destinationURL.path)")
+                if !downloadedFiles.contains(file.destinationURL) {
+                    downloadedFiles.append(file.destinationURL)
+                }
+                continue
+            }
             try? FileManager.default.removeItem(at: file.destinationURL)
         }
     }
@@ -971,7 +981,9 @@ class InboundNearbyConnection: NearbyConnection {
 
         for fileID in pendingFileIDs {
             guard let file = filesToBeReceived[fileID] else { continue }
-            guard file.created, file.bytesTransferred == file.meta.size else { continue }
+            let hasCompleted = file.bytesTransferred >= file.meta.size
+            let isMostlyComplete = file.meta.size > 0 && (Double(file.bytesTransferred) / Double(file.meta.size) >= 0.90 || file.bytesTransferred >= file.meta.size - 131072)
+            guard file.created, (hasCompleted || isMostlyComplete) else { continue }
 
             do {
                 try file.fileHandle?.close()

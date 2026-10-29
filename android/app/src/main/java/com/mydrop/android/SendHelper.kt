@@ -15,6 +15,14 @@ object SendHelper {
                 c.getColumnIndex(OpenableColumns.SIZE).takeIf { it >= 0 }?.let { size = c.getLong(it) }
             }
         }
+        if (size <= 0L) {
+            try {
+                resolver.openFileDescriptor(uri, "r")?.use { pfd ->
+                    val s = pfd.statSize
+                    if (s > 0L) size = s
+                }
+            } catch (_: Exception) {}
+        }
         SendItem(name, size, resolver.getType(uri) ?: "application/octet-stream") { resolver.openInputStream(uri)!! }
     }
 }
