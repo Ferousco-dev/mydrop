@@ -12,10 +12,10 @@ icon/AppIcon.iconset/
 icon/make-icon
 
 # Third-party code and downloads (not part of this project)
-src/
-neardrop-src/
-release-5.1/
-LUI/
+/src/
+/neardrop-src/
+/release-5.1/
+/LUI/
 
 # Scratch and leftovers
 *.bak

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="widget_description">Turn receiving on or off with one tap</string>
+    <!-- Put the link to your privacy policy between the tags, for example https://yourname.github.io/mydrop-privacy -->
+    <string name="privacy_policy_url" translatable="false"></string>
+</resources>
