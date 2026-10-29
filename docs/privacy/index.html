@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MyDrop Privacy Policy</title>
+<style>
+  :root { color-scheme: light dark; --bg:#fff; --fg:#1c1c1e; --muted:#6e6e73; --card:#f5f5f7; --line:#e5e5ea; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#000; --fg:#f5f5f7; --muted:#98989d; --card:#1c1c1e; --line:#2c2c2e; } }
+  body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
+  main { max-width:760px; margin:0 auto; padding:48px 22px 80px; }
+  h1 { font-size:36px; margin:0 0 4px; letter-spacing:-0.5px; }
+  h2 { font-size:21px; margin:38px 0 8px; }
+  p, li { color:var(--fg); } .muted { color:var(--muted); }
+  .card { background:var(--card); border-radius:18px; padding:16px 20px; margin:16px 0; }
+  table { width:100%; border-collapse:collapse; margin:12px 0; font-size:15px; }
+  th, td { text-align:left; padding:10px 8px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--muted); font-weight:600; } a { color:#0a84ff; }
+</style>
+</head>
+<body>
+<main>
+  <h1>MyDrop Privacy Policy</h1>
+  <p class="muted">Applies to MyDrop for Android and MyDrop for Mac. Last updated: 29 October 2026.</p>
+
+  <div class="card">
+    <b>The short version.</b> MyDrop sends files directly between your own devices over your Wi-Fi.
+    It has no accounts, no ads and no analytics, and it does not send your files, names or clipboard to the developer or to any server.
+  </div>
+
+  <h2>1. What MyDrop handles</h2>
+  <ul>
+    <li><b>Files and folders you choose to send or receive.</b> They travel directly from one device to the other. The developer never receives them.</li>
+    <li><b>Your device name.</b> It is announced on your local Wi-Fi so nearby devices can find yours, and shown to the people you send files to.</li>
+    <li><b>Clipboard text.</b> Only when you tap Send Clipboard, or when you switch on Clipboard sync. It is sent to the device you chose and is not stored by MyDrop.</li>
+    <li><b>Trusted devices and settings.</b> Names of devices you chose to always accept, and your switches, are stored on your own device only.</li>
+    <li><b>Phone files (optional).</b> If you switch on "Let my Mac browse this phone", your Mac can list and open files on the phone while it is on. It is protected by a code that only you see, and editing is off unless you switch it on.</li>
+    <li><b>Notification content (optional, "full" edition built from source only).</b> If you build and enable notification mirroring, the title and text of your notifications are sent to your Mac. The downloadable app does not include this.</li>
+  </ul>
+
+  <h2>2. How the data moves</h2>
+  <p>MyDrop connects devices on the same local network (a Wi-Fi router or a phone hotspot). File transfers use an encrypted connection, the same kind used by Quick Share. The phone-files feature uses a plain local connection protected by a code, so use it only on a network you trust. The optional "Share by QR" page on the Mac runs only while its QR code is on screen, and its address contains a random token.</p>
+
+  <h2>3. What we do not do</h2>
+  <ul>
+    <li>We do not collect, sell or share personal data.</li>
+    <li>We do not use advertising, tracking or analytics tools, and the app contains no such libraries.</li>
+    <li>We do not run servers that receive your files, names or clipboard.</li>
+    <li>We do not require an account.</li>
+  </ul>
+
+  <h2>4. Permissions on Android</h2>
+  <table>
+    <tr><th>Permission</th><th>Why MyDrop needs it</th></tr>
+    <tr><td>Network and Wi-Fi state, multicast</td><td>To find nearby devices and connect to them on your local network.</td></tr>
+    <tr><td>Notifications</td><td>To show accept requests, progress and "received" messages.</td></tr>
+    <tr><td>Foreground service</td><td>To keep receiving files while the app is closed. A notification is shown while it runs.</td></tr>
+    <tr><td>Run at start</td><td>To start receiving again after the phone restarts, if you turned receiving on.</td></tr>
+    <tr><td>All files access</td><td>Only for the optional phone-files feature, so your Mac can browse folders you allow. It is not used otherwise.</td></tr>
+    <tr><td>Internet</td><td>Android groups local network sockets under this permission. MyDrop does not contact any internet server.</td></tr>
+  </table>
+
+  <h2>5. Where your data is stored</h2>
+  <p>Received files are saved to your device's Downloads/MyDrop folder (Android) or your Downloads folder (Mac). Settings and trusted-device names are stored in the app's private storage. The pairing code for phone files is kept on your phone, and the Mac keeps it in its Keychain. Uninstalling the app removes its private data. Files you received stay where you saved them until you delete them.</p>
+
+  <h2>6. Children</h2>
+  <p>MyDrop is a general utility and is not directed at children under 13. It collects no personal information from anyone.</p>
+
+  <h2>7. Security</h2>
+  <p>Transfers are encrypted end to end between your devices. No method is perfectly secure, so please only accept files from devices and people you trust, and switch off phone files when you are not using it.</p>
+
+  <h2>8. Changes to this policy</h2>
+  <p>If this policy changes, the new version and date will be posted on this page.</p>
+
+  <h2>9. Contact</h2>
+  <p>Questions? Open an issue at <a href="https://github.com/Ferousco-dev/mydrop/issues">github.com/Ferousco-dev/mydrop/issues</a>.</p>
+
+  <p class="muted" style="margin-top:40px">MyDrop is open source: <a href="https://github.com/Ferousco-dev/mydrop">github.com/Ferousco-dev/mydrop</a></p>
+</main>
+</body>
+</html>

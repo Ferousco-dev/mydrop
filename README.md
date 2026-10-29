@@ -171,6 +171,9 @@ adb install -r app/build/outputs/apk/standard/debug/app-standard-debug.apk
 - The downloads are signed for sideloading only, so macOS and Android show a warning the first time.
 - Speed depends mostly on the Wi-Fi link: a strong 5 GHz signal or a phone hotspot is the fastest.
 
+## Privacy
+MyDrop has no accounts, ads or analytics, and sends your files only between your own devices. Read the [Privacy Policy](https://ferousco-dev.github.io/mydrop/privacy/).
+
 ## Credits
 The transfer engine comes from [QuickDrop](https://github.com/leonboe1/QuickDrop) by Leon Böttger, itself a fork of [NearDrop](https://github.com/grishka/NearDrop) by grishka. Both are released under the Unlicense (public domain). The protocol notes in NearDrop's `PROTOCOL.md` guided the Kotlin engine.
 
